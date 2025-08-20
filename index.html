@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DARA CHRISTIAN HIGH SCHOOL — Secondary</title>
+  <meta name="description" content="Dara Christian High School — Christ-centered excellence in O’level and A’level education in Lira, Uganda." />
+  <style>
+    :root {
+      --brand-light-blue: #cfe9ff; /* use ONLY on header & footer per request */
+      --ink: #0f172a; /* slate-900 */
+      --ink-soft: #334155; /* slate-600 */
+      --surface: #e6f7ff; /* main page background */
+      --accent: #0ea5a5; /* minimal accents for links/buttons (not header/footer color) */
+      --cream: #f7f3ea; /* optional section background */
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink); background: var(--surface); line-height: 1.6;
+    }
+
+    /* ===== Fixed (constant) header ===== */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: var(--brand-light-blue);
+      box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    }
+    .nav {
+      max-width: 1100px; margin: 0 auto; display: flex; gap: 1rem; align-items: center; padding: .75rem 1rem;
+    }
+    .brand { display: flex; flex-direction: column; }
+    .brand .title { font-weight: 800; letter-spacing: .3px; }
+    .brand .motto { font-size: .875rem; color: #073354; opacity: .9; }
+
+    .spacer { flex: 1; }
+
+    .menu { display: flex; gap: .25rem; flex-wrap: wrap; }
+    .menu a {
+      text-decoration: none; color: #073354; font-weight: 600; padding: .5rem .75rem; border-radius: 999px;
+    }
+    .menu a:hover, .menu a:focus { outline: none; background: rgba(7,51,84,.08); }
+
+    /* Mobile nav */
+    .nav-toggle { display: none; background: transparent; border: none; font-size: 1.25rem; }
+    @media (max-width: 900px) {
+      .menu { display: none; width: 100%; flex-direction: column; padding: .5rem 0; }
+      .menu.open { display: flex; }
+      .nav-toggle { display: inline-flex; align-items: center; justify-content: center; padding: .5rem .75rem; border-radius: .75rem; }
+    }
+
+    /* Offset body for fixed header height */
+    .page-top-offset { height: 64px; }
+
+    /* ===== Sections (global) ===== */
+    section { padding: 64px 1rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ======= NEW: Home section (replacing first code's hero with second code style) ======= */
+    #home.home-hero {
+      position: relative;
+      min-height: calc(100vh - 64px);
+      display: grid; place-items: center;
+      padding: 0 1rem;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      background: url('images/your-bluish-background.jpg') center/cover no-repeat fixed;
+    }
+    #home.home-hero::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(5,33,60,.45), rgba(5,33,60,.35));
+      pointer-events: none;
+    }
+    .home-content { position: relative; max-width: 900px; }
+    .home-title {
+      font-size: clamp(1.8rem, 2.4vw + 1rem, 3rem);
+      line-height: 1.1; margin: 0 0 .5rem;
+      animation: fadeUp .9s ease-out both;
+    }
+    .home-sub {
+      font-size: clamp(1rem, .6vw + .95rem, 1.25rem);
+      opacity: .95; font-style: italic;
+      animation: fadeUp .9s ease-out .15s both;
+    }
+    .scroll-down {
+      margin-top: 1.25rem; display: inline-block; font-weight: 700;
+      animation: floatY 2.4s ease-in-out infinite;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(6px); }
+    }
+
+    /* ===== Cards ===== */
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media (max-width: 900px) { .cards { grid-template-columns: 1fr; } }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,.04); }
+    .card h3 { margin-top: 0; }
+
+    /* ===== Alternate section bg ===== */
+    .muted { background: var(--cream); }
+
+    /* ===== Lists ===== */
+    ul.clean { margin: .25rem 0 0 1.25rem; }
+
+    /* ===== Simple fade-in on scroll ===== */
+    .reveal { opacity: 0; transform: translateY(8px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+
+    /* ===== Buttons ===== */
+    .btn { display: inline-block; padding: .7rem 1rem; border-radius: .75rem; border: 1px solid #e5e7eb; text-decoration: none; font-weight: 700; }
+    .btn:hover { box-shadow: 0 8px 22px rgba(0,0,0,.06); }
+
+    /* ===== Tables ===== */
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: .75rem; border-bottom: 1px solid #e5e7eb; text-align: left; }
+
+    /* ===== Footer ===== */
+    footer { background: var(--brand-light-blue); }
+
+    /* ===== Utility ===== */
+    .center { text-align: center; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    /* ======= NEW: About section layout (from second code, styled to match site) ======= */
+    #about .section-title {
+      text-align: center; margin-bottom: 24px; font-size: clamp(1.4rem, .8vw + 1rem, 2rem); color: #073354;
+    }
+    .about-cards {
+      display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 900px) { .about-cards { grid-template-columns: 1fr; } }
+    .about-lead {
+      text-align: center; color: var(--ink-soft); margin: 0 auto 1rem; max-width: 900px;
+    }
+    .values-list { margin: .5rem 0 0 1.25rem; }
+  </style>
+</head>
+<body>
+  <!-- ===== Constant Header (light blue only) — UNCHANGED ===== -->
+  <header class="site-header" role="banner">
+    <nav class="nav" aria-label="Primary">
+      <div class="brand" aria-label="School name and motto">
+        <span class="title">DARA CHRISTIAN HIGH SCHOOL</span>
+        <span class="motto">Have a Vision (Proverbs 29:18)</span>
+      </div>
+      <div class="spacer"></div>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="menu" id="navToggle" title="Toggle menu">☰</button>
+      <div class="menu" id="menu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#academics">Academics</a>
+        <a href="#admissions">Admissions</a>
+        <a href="#fees">Fees</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#staff">Staff</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+  <div class="page-top-offset" aria-hidden="true"></div>
+
+  <!-- ===== HOME ===== -->
+  <section id="home" class="home-hero">
+    <div class="home-content">
+      <h1 class="home-title">Welcome to Dara Christian High School</h1>
+      <p class="home-sub">“Have a Vision (Proverbs 29:18)”</p>
+      <a class="scroll-down" href="#about" aria-label="Scroll to About">↓ Scroll</a>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Us</h2>
+      <p class="about-lead reveal">
+        Dara Christian High School is a Christian-founded private secondary school in Lira, Uganda, located 6km along the Lira–Apala road at the foot of Ngetta hill.
+      </p>
+      <p class="about-lead reveal" style="margin-top:.25rem">
+        Founded in 2003 by David G. Opiokello and Racheal Opiokello, it has consistently ranked among the top schools in Lira.
+      </p>
+
+      <div class="about-cards">
+        <article class="card reveal">
+          <h3>Core Values</h3>
+          <ul class="values-list">
+            <li>Christ-like lifestyle</li>
+            <li>Accountability & Transparency</li>
+            <li>Team work</li>
+            <li>Professionalism, ethics & integrity</li>
+            <li>Leadership by example</li>
+            <li>Continuous learning & improvement</li>
+            <li>Disciplined conduct & Hardwork</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <h3>Vision</h3>
+          <p>“Be a leading and preferred provider of post primary school educational services in the East African sub-region.”</p>
+          <h3 style="margin-top:.75rem">Mission</h3>
+          <p>“To provide training opportunities to able and willing students that result into creativity and consistently excellent performance in a conducive environment in which Jesus is Lord.”</p>
+        </article>
+
+        <article class="card reveal">
+          <h3>History</h3>
+          <p>
+            From humble beginnings in 2003, Dara Christian High School has grown into a beacon of excellence—nurturing disciplined, Christ-centered leaders and achieving top rankings in Lira.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ACADEMICS ===== -->
+  <section id="academics" class="muted">
+    <div class="container">
+      <h2>Academics</h2>
+      <p>We offer both O’level and A’level, aligned to the current Ministry of Education & Sports and NCDC curriculum.</p>
+      <div class="cards">
+        <article class="card reveal">
+          <h3>O’level (S1 – S4)</h3>
+          <p>Students undertake optional subjects such as ICT, Kiswahili, Physical Education, Entrepreneurship Education, Christian Religious Education, and Agriculture.</p>
+          <img src="images/olevel-class.jpg" alt="O’level classroom session" loading="lazy" width="400" height="300" style="width:100%; border-radius:12px; margin-top:.5rem; aspect-ratio:4/3; object-fit:cover;" />
+        </article>
+        <article class="card reveal">
+          <h3>A’level (S5 – S6)</h3>
+          <p>We offer a variety of subject combinations for both Arts and Sciences, supporting diverse career paths and university readiness. Best learning and research activities</p>
+          <img src="images/alevel-lab.jpg" alt="A’level science laboratory" loading="lazy" width="400" height="300" style="width:100%; border-radius:12px; margin-top:.5rem; aspect-ratio:4/3; object-fit:cover;" />
+        </article>
+        <article class="card reveal">
+          <h3>Holistic Development</h3>
+          <p>Discipline, leadership by example, and co-curricular engagements—including sports like ball games, acrobatics and aerobics and debate—build character and excellence.</p>
+          <img src="images/co-curricular.jpg" alt="Students in co-curricular activities" loading="lazy" width="400" height="300" style="width:100%; border-radius:12px; margin-top:.5rem; aspect-ratio:4/3; object-fit:cover;" />
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ADMISSIONS ===== -->
+  <section id="admissions">
+    <div class="container">
+      <h2>Admissions</h2>
+      <p><strong>Admission is ongoing</strong> for all classes. Obtain application forms at the school premises, via WhatsApp <a href="tel:+256789376707">+256 789 376 707</a>, or email <a href="mailto:aaronomaraaaron@yahoo.com">aaronomaraaaron@yahoo.com</a>.</p>
+      <div class="card reveal">
+        <h3>Why Choose Dara Christian High School?</h3>
+        <ul class="clean">
+          <li>Christ-centered culture and mentorship</li>
+          <li>Strong performance in both O’level and A’level</li>
+          <li>Dedicated, professional staff and modern learning resources</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEES ===== -->
+  <section id="fees" class="muted">
+    <div class="container">
+      <h2>Fees & Bursaries</h2>
+      <p>Our fees are affordable. Bursaries (both full and half) are available for well academically performing students at both O’level and A’level.</p>
+      <div class="card reveal">
+        <table aria-label="Fees information">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tuition</td>
+              <td>Affordable and competitive. Contact the office for the latest schedule.</td>
+            </tr>
+            <tr>
+              <td>Bursaries</td>
+              <td>Full and half bursaries for top-performing students (O’level & A’level).</td>
+            </tr>
+            <tr>
+              <td>Contacts</td>
+              <td>WhatsApp/Phone: <a href="tel:+256789376707">+256 789 376 707</a> · Email: <a href="mailto:aaronomaraaaron@yahoo.com">aaronomaraaaron@yahoo.com</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ACHIEVEMENTS ===== -->
+  <section id="achievements">
+    <div class="container">
+      <h2>Achievements & Awards</h2>
+      <div class="cards">
+        <article class="card reveal">
+          <h3>2025 National Debate Trophy</h3>
+          <p>Our students won a national trophy at the 2025 Nationals Debating competition.</p>
+          <img src="images/debate-trophy.jpg" alt="Debate team holding a trophy" loading="lazy" width="400" height="300" style="width:100%; border-radius:12px; margin-top:.5rem; aspect-ratio:4/3; object-fit:cover;" />
+        </article>
+        <article class="card reveal">
+          <h3>Regional & National Sports</h3>
+          <p>Active participation in netball and volleyball at regional and national levels.</p>
+          <img src="images/sports-netball-volleyball.jpg" alt="Netball and volleyball action" loading="lazy" width="400" height="300" style="width:100%; border-radius:12px; margin-top:.5rem; aspect-ratio:4/3; object-fit:cover;" />
+        </article>
+        <article class="card reveal">
+          <h3>Academic Excellence</h3>
+          <p>Consistent top rankings in Lira with students excelling in national exams.</p>
+          <img src="images/academic-excellence.jpg" alt="Students celebrating academic success" loading="lazy" width="400" height="300" style="width:100%; border-radius:12px; margin-top:.5rem; aspect-ratio:4/3; object-fit:cover;" />
+        </article>
+      </div>
+    </div>
+  </section>
+
+ <!-- ===== STAFF — UNCHANGED from first code ===== -->
+  <section id="staff" class="muted">
+    <div class="container">
+      <h2>Our Staff</h2>
+      <div class="cards">
+        <article class="card reveal">
+          <!-- Replace with a staff headshot -->
+          <img src="images/staff-headteacher.jpg" alt="Headteacher Ainebyona Ezras" loading="lazy" width="400" height="300" style="width:100%; border-radius:12px; aspect-ratio:1/1; object-fit:cover;" />
+          <h3 style="margin:.75rem 0 .25rem">Headteacher</h3>
+          <p><strong>Ainebyona Ezras</strong><br />
+            <a href="tel:+256789376707">+256 789 376 707</a></p>
+        </article>
+        <article class="card reveal">
+          <!-- Replace with a staff headshot -->
+          <img src="images/staff-pta.jpg" alt="PTA Representative Mr. Omara Aaron" loading="lazy" width="400" height="300" style="width:100%; border-radius:12px; aspect-ratio:1/1; object-fit:cover;" />
+          <h3 style="margin:.75rem 0 .25rem">PTA</h3>
+          <p><strong>Mr. Omara Aaron</strong><br />
+            <a href="tel:+256789376707">+256 789 376 707</a></p>
+        </article>
+        <article class="card reveal">
+          <!-- Replace with a staff group photo -->
+          <img src="images/staff-team.jpg" alt="Teaching staff group" loading="lazy" width="400" height="300" style="width:100%; border-radius:12px; aspect-ratio:4/3; object-fit:cover;" />
+          <h3 style="margin:.75rem 0 .25rem">Dedicated Team</h3>
+          <p>Professional educators committed to excellence, discipline, and mentorship.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT — UPDATED ===== -->
+
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <div class="grid-2">
+        <div class="card reveal">
+          <h3>Get in touch</h3>
+          <p>
+            <strong>Phone:</strong> <a href="tel:+256789376707">+256 789 376 707</a><br />
+            <strong>Email:</strong> <a href="mailto:aaronomaraaaron@yahoo.com">aaronomaraaaron@yahoo.com</a>
+          </p>
+          <p><strong>Location:</strong> 6km along Lira–Apala Road, at the foot of Ngetta Hill, Lira, Uganda.</p>
+          <a class="btn" href="#admissions">Admissions</a>
+        </div>
+        <div class="card reveal">
+  <h3>Our Location</h3>
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3960.0000000000005!2d32.929357!3d2.292519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sug!4v1692560000000!5m2!1sen!2sug"
+    width="100%" height="300" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+
+  <footer class="center">
+    <div class="container">
+      <p>&copy; 2025 Dara Christian High School, Lira, Uganda — All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== JS: Simple scroll reveal & mobile nav toggle ===== -->
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Mobile nav toggle
+    const btn = document.getElementById('navToggle');
+    const menu = document.getElementById('menu');
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true' || false;
+      btn.setAttribute('aria-expanded', !expanded);
+      menu.classList.toggle('open');
+    });
+  </script>
+
+</body>
+</html>
